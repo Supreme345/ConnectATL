@@ -1,45 +1,81 @@
-import { Link } from 'react-router-dom'
+
+import { Link } from "react-router-dom";
 
 export default function Landing() {
   return (
     <>
       <section className="hero text-center">
         <div className="container">
-          <h1 className="display-5 fw-bold">Find affordable internet at your address</h1>
+          <h1 className="display-5 fw-bold">
+            Find affordable internet at your address
+          </h1>
+
           <p className="lead my-4">
-            Answer a few quick questions. We'll show the plans available where you live
-            and the discounts you may qualify for, in English or Spanish.
+            Answer a few quick questions to explore affordable
+            internet programs and check preliminary eligibility.
           </p>
-          <Link to="/check" className="btn btn-light btn-lg fw-semibold">Check my options</Link>
-          <p className="small mt-3 mb-0 opacity-75">Takes about 2 minutes. No account needed.</p>
+
+          <Link
+            to="/check"
+            className="btn btn-light btn-lg fw-semibold"
+          >
+            Check my options
+          </Link>
+
+          <p className="small mt-3 mb-0 opacity-75">
+            Takes about 2 minutes. No account needed.
+          </p>
         </div>
       </section>
 
       <section className="container py-5">
         <div className="row text-center g-4">
           {[
-            ['1. Enter your address', 'We find the providers that serve your home.'],
-            ['2. Answer a few questions', 'We check which discounts you may qualify for.'],
-            ['3. Get your plan and checklist', 'See the cheapest options and print what you need to apply.'],
-          ].map(([title, text]) => (
+            [
+              "1. Enter your address",
+              "Tell us where you are looking for internet service.",
+            ],
+            [
+              "2. Answer a few questions",
+              "Check your household against our demo eligibility rules.",
+            ],
+            [
+              "3. Explore plans and next steps",
+              "Review program information and prepare to apply.",
+            ],
+          ].map(([title, description]) => (
             <div className="col-md-4" key={title}>
               <h5>{title}</h5>
-              <p className="text-muted">{text}</p>
+              <p className="text-muted">{description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* MAP SECTION: Ichi and Sultan replace the placeholder div below with the h3-js hex map */}
       <section className="container pb-5">
-        <h3 className="text-center mb-2">Internet access gaps across Atlanta</h3>
+        <h3 className="text-center mb-2">
+          Internet access gaps across Atlanta
+        </h3>
+
         <p className="text-center text-muted mb-4">
-          Estimated areas where households may be eligible for discounts but unserved. Estimates only.
+          Explore broadband access and affordability across
+          Atlanta neighborhoods.
         </p>
-        <div id="map-container" className="map-placeholder">
-          <span>Map placeholder</span>
+
+        <div
+          id="map-container"
+          className="map-placeholder d-flex flex-column align-items-center justify-content-center text-center"
+          style={{ minHeight: 320 }}
+        >
+          <h5>Atlanta Broadband Access Map</h5>
+
+          <p className="text-muted px-3">
+            Geographic visualization coming next.
+            FCC coverage and neighborhood-level data
+            have not yet been connected.
+          </p>
         </div>
       </section>
     </>
-  )
+  );
 }
