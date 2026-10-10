@@ -1,30 +1,57 @@
+import { useState } from 'react'
+import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
+import Landing from './pages/Landing'
+import EligibilityForm from './pages/EligibilityForm'
+import Results from './pages/Results'
+import Checklist from './pages/Checklist'
+import Dashboard from './pages/Dashboard'
 
-import { useEffect, useState } from 'react';
-import './App.css';
+export default function App() {
+  // Shared state so every page can read it
+  const [formData, setFormData] = useState(null)
+  const [selectedPlan, setSelectedPlan] = useState(null)
 
-function App() {
-  const [message, setMessage] = useState('Connecting to backend...');
-
-  useEffect(() => {
-    fetch('http://localhost:8080/api/health')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Request failed');
-        }
-        return response.text();
-      })
-      .then(setMessage)
-      .catch(() => setMessage('Backend connection failed'));
-  }, []);
+  const navigate = useNavigate()
+  const location = useLocation()
 
   return (
-    <main style={{ padding: '40px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>ConnectATL</h1>
-      <p>Atlanta Broadband Benefit Navigator</p>
-      <p>Backend status: {message}</p>
-    </main>
-  );
+    <>
+      <nav className="navbar navbar-dark brand-bg d-print-none">
+        <div className="container d-flex justify-content-between align-items-center">
+          <Link className="navbar-brand fw-bold" to="/">ConnectATL</Link>
+          {location.pathname !== '/' && (
+            <button
+              type="button"
+              className="btn btn-outline-light btn-sm px-3 back-btn"
+              onClick={() => navigate(-1)}
+            >
+              ← Back
+            </button>
+          )}
+        </div>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route
+          path="/check"
+          element={<EligibilityForm formData={formData} setFormData={setFormData} />}
+        />
+        <Route
+          path="/results"
+          element={
+            <Results
+              formData={formData}
+              selectedPlan={selectedPlan}
+              setSelectedPlan={setSelectedPlan}
+            />
+          }
+        />
+        <Route
+          path="/checklist"
+          element={<Checklist formData={formData} selectedPlan={selectedPlan} />}
+        />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </>
+  )
 }
-
-export default App;
-
