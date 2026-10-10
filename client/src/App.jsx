@@ -4,7 +4,6 @@ import Landing from './pages/Landing'
 import EligibilityForm from './pages/EligibilityForm'
 import Results from './pages/Results'
 import Checklist from './pages/Checklist'
-import Dashboard from './pages/Dashboard'
 
 export default function App() {
   // Shared state so every page can read it
@@ -50,7 +49,6 @@ export default function App() {
           path="/checklist"
           element={<Checklist formData={formData} selectedPlan={selectedPlan} />}
         />
-        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>
   )

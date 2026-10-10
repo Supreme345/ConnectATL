@@ -29,6 +29,17 @@ export default function Landing() {
           ))}
         </div>
       </section>
+
+      {/* MAP SECTION: Ichi and Sultan replace the placeholder div below with the h3-js hex map */}
+      <section className="container pb-5">
+        <h3 className="text-center mb-2">Internet access gaps across Atlanta</h3>
+        <p className="text-center text-muted mb-4">
+          Estimated areas where households may be eligible for discounts but unserved. Estimates only.
+        </p>
+        <div id="map-container" className="map-placeholder">
+          <span>Map placeholder</span>
+        </div>
+      </section>
     </>
   )
 }

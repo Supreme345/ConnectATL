@@ -11,6 +11,24 @@
 .back-btn { border-radius: 999px; font-weight: 600; }
 .back-btn:hover { background: #fff; color: var(--brand-dark); }
 
+/* Placeholder for the hex map on the landing page */
+.map-placeholder {
+  height: 480px;
+  border: 2px dashed #9db8e0;
+  border-radius: 12px;
+  background: #f2f7ff;
+  color: #6b86b3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 576px) {
+  .map-placeholder { height: 300px; }
+}
+
 @media print {
   .d-print-none { display: none !important; }
   body { background: #fff; }
