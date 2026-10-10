@@ -1,0 +1,16 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies and builds
+client/node_modules/
+client/dist/
+
+# Java / Spring Boot builds
+server/target/
+
+# Operating system and editor files
+.DS_Store
+.idea/
+.vscode/
