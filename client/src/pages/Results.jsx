@@ -99,6 +99,8 @@ export default function Results({
   };
 
   const goToChecklist = () => {
+    if (!eligible) return;
+
     const plan = plans.find(
       (p) => getPlanId(p) === selectedId
     );
@@ -170,7 +172,15 @@ export default function Results({
             <p>No plans are currently listed.</p>
           )}
 
-          {sortedPlans.map((plan) => {
+          {!eligible && (
+            <div className="alert alert-info">
+              {status === "NEEDS_MORE_INFO"
+                ? "We need additional information before recommending a plan."
+                : "You do not currently qualify for the affordable internet programs evaluated by ConnectATL."}
+            </div>
+          )}
+
+          {eligible && sortedPlans.map((plan) => {
             const id = getPlanId(plan);
             const price = getPlanPrice(plan);
             const isSelected = id === selectedId;
@@ -257,7 +267,7 @@ export default function Results({
               <button
                 type="button"
                 className="btn btn-primary w-100"
-                disabled={selectedId === null}
+                disabled={!eligible || selectedId === null}
                 onClick={goToChecklist}
               >
                 Get my application checklist

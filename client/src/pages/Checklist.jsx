@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { Navigate, Link } from "react-router-dom";
 
 const COX_APPLICATION_URL =
@@ -9,6 +10,12 @@ export default function Checklist({
   selectedPlan,
   eligibilityResult,
 }) {
+  const [question, setQuestion] = useState("");
+  const [language, setLanguage] = useState("English");
+  const [answer, setAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   if (!formData || !eligibilityResult) {
     return <Navigate to="/check" replace />;
   }
@@ -30,6 +37,40 @@ export default function Checklist({
     "Visit the provider's official application page.",
     "Confirm the final price and complete the provider's application.",
   ];
+
+  async function askAssistant(event) {
+    event.preventDefault();
+
+    if (!question.trim() || loading) return;
+
+    setLoading(true);
+    setError("");
+    setAnswer("");
+
+    try {
+      const response = await fetch("/api/ai/explain", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          question: question.trim(),
+          language,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("The AI assistant is temporarily unavailable.");
+      }
+
+      const data = await response.json();
+      setAnswer(data.answer || "No answer was returned.");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="container py-5" style={{ maxWidth: 720 }}>
@@ -78,6 +119,95 @@ export default function Checklist({
         This is a general preparation checklist, not an official
         provider document. Requirements may differ by program.
       </p>
+
+      {/* Gemini AI Assistant */}
+      <div className="card shadow-sm mb-4 d-print-none">
+        <div className="card-body">
+          <div className="d-flex align-items-center justify-content-between mb-2">
+            <h4 className="mb-0">AI Application Assistant</h4>
+            <span className="badge bg-primary">Powered by Gemini</span>
+          </div>
+
+          <p className="text-muted small">
+            Have questions about eligibility or applying?
+            Ask our AI assistant in English or Spanish.
+          </p>
+
+          <form onSubmit={askAssistant}>
+            <label
+              htmlFor="assistant-language"
+              className="form-label fw-semibold"
+            >
+              Response language
+            </label>
+
+            <select
+              id="assistant-language"
+              className="form-select mb-3"
+              value={language}
+              onChange={(event) => setLanguage(event.target.value)}
+            >
+              <option value="English">English</option>
+              <option value="Spanish">Español</option>
+            </select>
+
+            <label
+              htmlFor="assistant-question"
+              className="form-label fw-semibold"
+            >
+              Your question
+            </label>
+
+            <textarea
+              id="assistant-question"
+              className="form-control mb-3"
+              rows={3}
+              maxLength={1000}
+              placeholder="What documents might I need to apply?"
+              value={question}
+              onChange={(event) => setQuestion(event.target.value)}
+              required
+            />
+
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading || !question.trim()}
+            >
+              {loading ? "Generating answer..." : "Ask assistant"}
+            </button>
+          </form>
+
+          {loading && (
+            <div className="mt-3 text-muted" role="status">
+              <span
+                className="spinner-border spinner-border-sm me-2"
+                aria-hidden="true"
+              />
+              Gemini is preparing your answer...
+            </div>
+          )}
+
+          {error && (
+            <div className="alert alert-danger mt-3" role="alert">
+              {error}
+            </div>
+          )}
+
+          {answer && (
+            <div className="alert alert-light border mt-3 mb-0">
+              <h6 className="fw-bold">Assistant response</h6>
+              <div style={{ whiteSpace: "pre-wrap" }}>
+                {answer}
+              </div>
+              <p className="small text-muted mt-3 mb-0">
+                AI-generated guidance may be inaccurate.
+                Confirm requirements with the provider.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
 
       <div className="d-flex gap-2 flex-wrap d-print-none">
         <a
