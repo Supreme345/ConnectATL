@@ -1,0 +1,77 @@
+
+{
+  "lat": 33.749,
+  "lng": -84.388,
+  "h3_hex": "8844c1a811fffff",
+  "h3_resolution": 8,
+  "service_type": "residential",
+  "count": 11,
+  "providers": [
+    {
+      "name": "AT&T",
+      "technology": "Fiber",
+      "max_download_mbps": 5000,
+      "max_upload_mbps": 5000
+    },
+    {
+      "name": "Xfinity",
+      "technology": "Fiber",
+      "max_download_mbps": 2000,
+      "max_upload_mbps": 250
+    },
+    {
+      "name": "Xfinity",
+      "technology": "Cable",
+      "max_download_mbps": 2000,
+      "max_upload_mbps": 250
+    },
+    {
+      "name": "Verizon",
+      "technology": "Fixed Wireless",
+      "max_download_mbps": 1000,
+      "max_upload_mbps": 75
+    },
+    {
+      "name": "Starlink",
+      "technology": "LEO Satellite",
+      "max_download_mbps": 280,
+      "max_upload_mbps": 30
+    },
+    {
+      "name": "Viasat Inc",
+      "technology": "GSO Satellite",
+      "max_download_mbps": 150,
+      "max_upload_mbps": 3
+    },
+    {
+      "name": "AT&T",
+      "technology": "Fixed Wireless",
+      "max_download_mbps": 100,
+      "max_upload_mbps": 20
+    },
+    {
+      "name": "MINTernet",
+      "technology": "Fixed Wireless",
+      "max_download_mbps": 100,
+      "max_upload_mbps": 20
+    },
+    {
+      "name": "T-Mobile",
+      "technology": "Fixed Wireless",
+      "max_download_mbps": 100,
+      "max_upload_mbps": 20
+    },
+    {
+      "name": "HughesNet",
+      "technology": "GSO Satellite",
+      "max_download_mbps": 50,
+      "max_upload_mbps": 5
+    },
+    {
+      "name": "AT&T",
+      "technology": "DSL",
+      "max_download_mbps": 10,
+      "max_upload_mbps": 1
+    }
+  ]
+}

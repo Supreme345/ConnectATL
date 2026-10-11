@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "h3-js": "^4.5.0",
+    "leaflet": "^1.9.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {

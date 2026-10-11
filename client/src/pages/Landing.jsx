@@ -1,4 +1,4 @@
-
+import BroadbandMap from "../components/BroadbandMap";
 import { Link } from "react-router-dom";
 
 export default function Landing() {
@@ -62,18 +62,9 @@ export default function Landing() {
           Atlanta neighborhoods.
         </p>
 
-        <div
-          id="map-container"
-          className="map-placeholder d-flex flex-column align-items-center justify-content-center text-center"
-          style={{ minHeight: 320 }}
-        >
-          <h5>Atlanta Broadband Access Map</h5>
-
-          <p className="text-muted px-3">
-            Geographic visualization coming next.
-            FCC coverage and neighborhood-level data
-            have not yet been connected.
-          </p>
+        
+        <div id="map-container">
+          <BroadbandMap />
         </div>
       </section>
     </>
